@@ -283,7 +283,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.5, >= 4.5.2)
   byebug
-  capybara (>= 2.15)
+  capybara (~> 3.33)
   devise (~> 4.7, >= 4.7.3)
   devise-bootstrap-views (~> 1.1)
   devise-i18n (~> 1.9, >= 1.9.2)

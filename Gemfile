@@ -82,7 +82,7 @@ end
 
 group :test do
   # Capybara: Test web applications by simulating how a real user would interact with your app
-  gem 'capybara', '>= 2.15' # https://github.com/teamcapybara/capybara/blob/3.33_stable/README.md#using-capybara-with-rspec
+  gem 'capybara', '~> 3.33' # https://github.com/teamcapybara/capybara/blob/3.33_stable/README.md#using-capybara-with-rspec
   gem 'selenium-webdriver'
   # Run Selenium tests more easily with install and updates for all supported webdrivers
   gem 'webdrivers' # https://github.com/titusfortner/webdrivers
