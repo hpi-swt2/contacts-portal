@@ -14,7 +14,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.4' # https://github.com/rails/rails
 gem 'sqlite3', '~> 1.4' # https://www.sqlite.org/index.html
 # Development server
 gem 'puma', '~> 5.0', '>= 5.0.2' # https://github.com/puma/puma
-# Transpile app-like JavaScript
+# Transpile app-like JavaScript, Webpacker is the default JavaScript compiler for Rails 6
 gem 'webpacker', '~> 4.0' # https://github.com/rails/webpacker
 # Turbolinks makes navigating your web application faster
 # When you follow a link, Turbolinks automatically fetches the page, swaps in its <body>, and merges its <head>
@@ -75,9 +75,9 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code
   gem 'web-console', '>= 3.3.0' # https://github.com/rails/web-console
   # Replaces standard Rails error page with a more useful error page
-  gem 'better_errors', '~> 2.8', '>= 2.8.3'
+  gem 'better_errors', '~> 2.8', '>= 2.8.3' # https://github.com/BetterErrors/better_errors
   # binding_of_caller is optional, but is necessary to use Better Errors' advanced features
-  gem 'binding_of_caller', '~> 0.8.0'
+  gem 'binding_of_caller', '~> 0.8.0' # https://github.com/banister/binding_of_caller
 end
 
 group :test do
