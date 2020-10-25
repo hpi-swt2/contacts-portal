@@ -34,13 +34,7 @@ sed -ni 'H;${x;s/^\n//;s/end$/  root to: \"devise\/sessions#new\"\n&/;p;}' confi
 #   <p class="notice"><%= notice %></p>
 #   <p class="alert"><%= alert %></p>
 # </div>
-sed -ni 'H;${x;s/^\n//;s/    <%= yield %>/    <div class=\"container-fluid\">\n&/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/    <%= yield %>/      <%= yield %>/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/  <\/body>/    <\/div>\n&/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/  <\/body>/    <div class=\"container-fluid\">\n&/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/  <\/body>/      <p class=\"notice\"><%= notice %><\/p>\n&/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/  <\/body>/      <p class=\"alert\"><%= alert %><\/p>\n&/;p;}' app/views/layouts/application.html.erb
-sed -ni 'H;${x;s/^\n//;s/  <\/body>/    <\/div>\n&/;p;}' app/views/layouts/application.html.erb
+sed -ni 'H;${x;s/^\n//;s/    <%= yield %>/    <div class=\"container-fluid\">\n      <p class=\"notice\"><%= notice %><\/p>\n      <p class=\"alert\"><%= alert %><\/p>\n    <\/div>\n    <div class=\"container-fluid\">\n      <%= yield %>\n    <\/div>/;p;}' app/views/layouts/application.html.erb
 # generate the user
 bundle exec rails generate devise user
 # generate user views
