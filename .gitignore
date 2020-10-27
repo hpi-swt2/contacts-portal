@@ -64,3 +64,6 @@ build-iPhoneSimulator/
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# ignore generated logs
+/log/
