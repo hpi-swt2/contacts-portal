@@ -52,3 +52,6 @@ sed -ni 'H;${x;s/^\n//;s/end$/  # The dependent: option allows to specify that a
 # migrate database
 #
 bundle exec rails db:migrate
+
+# remove Rakefile
+rm Rakefile
