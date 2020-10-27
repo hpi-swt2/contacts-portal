@@ -46,7 +46,7 @@ bundle exec rails generate devise:views user
 
 bundle exec rails generate scaffold note title:string content:text user:references
 # add "has_many :notes, dependent: :delete_all" to the user class definition.
-sed -ni 'H;${x;s/^\n//;s/end$/  has_many :notes, dependent: :delete_all\n&/;p;}' app/models/user.rb
+sed -ni 'H;${x;s/^\n//;s/end$/  # The dependent: option allows to specify that associated records should be deleted when the owner is deleted\n  # https:\/\/api\.rubyonrails\.org\/classes\/ActiveRecord\/Associations\/ClassMethods.html >> Deleting from Associations\n  has_many :notes, dependent: :delete_all\n&/;p;}' app/models/user.rb
 
 #
 # migrate database
