@@ -74,3 +74,43 @@ bundle exec rails db:migrate
 
 # remove Rakefile
 rm Rakefile
+
+#
+# styling
+#
+
+# replace app/assets/stylesheets/application.css with a scss file
+mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
+sed -ni 'H;${x;s/^\n//;s/\n \*\n \*= require_tree \.\n \*= require_self/\n/;p;}' app/assets/stylesheets/application.scss
+
+SCSSLines=(
+    ""
+    "// Remove all the \*= require and \*= require_tree statements from the Sass file."
+    "// Instead, use @import to import Sass files."
+    "// Do not use \*= require in Sass or your other stylesheets will not be "
+    "// able to access the Bootstrap mixins and variables."
+    "// See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails"
+    ""
+    "// Custom bootstrap variables must be set or *before* bootstrap is imported"
+    "// https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss"
+    "\$primary: #dd6108;"
+    "\$primary-active: #ef8d47;"
+    "\$primary-hover: #cc5908;"
+    "\$danger: #c60505;"
+    "\$success: #00911f;"
+    "// \$secondary: #dd6108;"
+    "// \$success: #dd6108;"
+    "// \$info: #dd6108;"
+    "// \$warning: #dd6108;"
+    "// \$danger: #dd6108;"
+    "// \$light: #dd6108;"
+    "// \$dark: #dd6108;"
+    "// https://github.com/twbs/bootstrap-rubygem"
+    "@import \"bootstrap\";"
+    "// https://github.com/bokmann/font-awesome-rails"
+    "@import \"font-awesome\";"
+)
+
+for line in "${SCSSLines[@]}"; do
+    echo ${line} >> app/assets/stylesheets/application.scss
+done
