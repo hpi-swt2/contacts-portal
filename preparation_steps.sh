@@ -75,11 +75,15 @@ bundle exec rails db:migrate
 # remove Rakefile
 rm Rakefile
 
+# remove notice from app/view/notes/index.html.erb and app/view/notes/show.html.erb, as it is already stated in app/views/layouts/application.html.erb
+sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/index.html.erb
+sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/show.html.erb
+
 #
 # styling
 #
 
-# replace app/assets/stylesheets/application.css with a scss file
+# replace app/assets/stylesheets/application.css with a scss file, that imports bootstrap
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 sed -ni 'H;${x;s/^\n//;s/\n \*\n \*= require_tree \.\n \*= require_self/\n/;p;}' app/assets/stylesheets/application.scss
 
