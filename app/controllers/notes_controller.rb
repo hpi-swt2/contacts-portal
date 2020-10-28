@@ -24,7 +24,7 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      redirect_to @note, notice: 'Note was successfully created.'
+      redirect_to @note, notice: I18n.t('confirmation.resource_creation', resource: Note)
     else
       render :new
     end
@@ -33,7 +33,7 @@ class NotesController < ApplicationController
   # PATCH/PUT /notes/1
   def update
     if @note.update(note_params)
-      redirect_to @note, notice: 'Note was successfully updated.'
+      redirect_to @note, notice: I18n.t('confirmation.resource_update', resource: Note)
     else
       render :edit
     end
@@ -42,7 +42,7 @@ class NotesController < ApplicationController
   # DELETE /notes/1
   def destroy
     @note.destroy
-    redirect_to notes_url, notice: 'Note was successfully destroyed.'
+    redirect_to notes_url, notice: I18n.t('confirmation.resource_deletion', resource: Note)
   end
 
   private

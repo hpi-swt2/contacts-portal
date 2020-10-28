@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <h1>Notes</h1>
 
 <table>
@@ -18,7 +20,7 @@
         <td><%= note.user_id %></td>
         <td><%= link_to 'Show', note %></td>
         <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: I18n.t('questions.confirmation') } %></td>
       </tr>
     <% end %>
   </tbody>

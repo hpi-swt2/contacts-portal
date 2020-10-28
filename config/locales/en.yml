@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  questions:
+    confirmation: "Are you sure?"
+  confirmation:
+    resource_creation: "%{resource} was successfully created."
+    resource_deletion: "%{resource} was successfully deleted."
+    resource_update: "%{resource} was successfully updated."

@@ -25,21 +25,21 @@ yes n | bundle exec rails new . --skip-spring --skip-listen
 bundle exec rails generate devise:install
 
 # add 'config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }' to 'config/environments/development.rb'
-sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { host: \"localhost\", port: 3000 }\n&/;p;}' config/environments/development.rb
+sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { host: \x27localhost\x27, port: 3000 }\n&/;p;}' config/environments/development.rb
 
 # add 'root to: "devise/sessions#new"' to config/routes.rb
-sed -ni 'H;${x;s/^\n//;s/end$/  root to: \"devise\/sessions#new\"\n&/;p;}' config/routes.rb
+sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27devise\/sessions#new\x27\n&/;p;}' config/routes.rb
 
 # add link to devise docs to routes configuration
 sed -ni 'H;${x;s/^\n//;s/devise_for :users/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' config/routes.rb
 
 # preparate  the application layout file's body to contain the follwing:
 # <div class="container-fluid">
-#   <%= yield %>
-# </div>
-# <div class="container-fluid">
 #   <p class="notice"><%= notice %></p>
 #   <p class="alert"><%= alert %></p>
+# </div>
+# <div class="container-fluid">
+#   <%= yield %>
 # </div>
 sed -ni 'H;${x;s/^\n//;s/    <%= yield %>/    <div class=\"container-fluid\">\n      <p class=\"notice\"><%= notice %><\/p>\n      <p class=\"alert\"><%= alert %><\/p>\n    <\/div>\n    <div class=\"container-fluid\">\n      <%= yield %>\n    <\/div>/;p;}' app/views/layouts/application.html.erb
 
@@ -87,6 +87,7 @@ sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/vie
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
 sed -ni 'H;${x;s/^\n//;s/\n \*\n \*= require_tree \.\n \*= require_self/\n/;p;}' app/assets/stylesheets/application.scss
 
+# add bootstrap variables and import bootstrap
 SCSSLines=(
     ""
     "// Remove all the \*= require and \*= require_tree statements from the Sass file."
@@ -110,11 +111,39 @@ SCSSLines=(
     "// \$light: #dd6108;"
     "// \$dark: #dd6108;"
     "// https://github.com/twbs/bootstrap-rubygem"
-    "@import \"bootstrap\";"
+    "@import \x27bootstrap\x27;"
     "// https://github.com/bokmann/font-awesome-rails"
-    "@import \"font-awesome\";"
+    "@import \x27font-awesome\x27;"
 )
-
 for line in "${SCSSLines[@]}"; do
     echo ${line} >> app/assets/stylesheets/application.scss
 done
+
+# configuring i18n
+
+# remove hello world string from english dictionary
+sed -ni 'H;${x;s/^\n//;s/\n  hello: \"Hello world\"//;p;}' config/locales/en.yml
+
+# add english strings
+sed -ni 'H;${x;s/^\n//;s/$/\n  questions:/;p;}' config/locales/en.yml
+sed -ni 'H;${x;s/^\n//;s/$/\n    confirmation: \x27Are you sure?\x27/;p;}' config/locales/en.yml
+sed -ni 'H;${x;s/^\n//;s/$/\n  confirmation:/;p;}' config/locales/en.yml
+sed -ni 'H;${x;s/^\n//;s/$/\n    resource_creation: \x27%{resource} was successfully created\.\x27/;p;}' config/locales/en.yml
+sed -ni 'H;${x;s/^\n//;s/$/\n    resource_deletion: \x27%{resource} was successfully deleted\.\x27/;p;}' config/locales/en.yml
+sed -ni 'H;${x;s/^\n//;s/$/\n    resource_update: \x27%{resource} was successfully updated\.\x27/;p;}' config/locales/en.yml
+
+
+# replace 'Are you sure?' with I18n.t('questions.confirmation')
+sed -ni 'H;${x;s/^\n//;s/\x27Are you sure?\x27/I18n\.t(\x27questions\.confirmation\x27)/;p;}' app/views/notes/index.html.erb
+
+# replace 'Note was successfully created.' with I18n.t('confirmation.resource_creation', resource: Note)
+sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully created.\x27/I18n.t(\x27confirmation\.resource_creation\x27, resource: Note)/;p;}' app/controllers/notes_controller.rb
+
+# replace 'Note was successfully updated.' with I18n.t('confirmation.resource_update', resource: Note)
+sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully updated.\x27/I18n.t(\x27confirmation\.resource_update\x27, resource: Note)/;p;}' app/controllers/notes_controller.rb
+
+# replace 'Note was successfully destroyed.' with I18n.t('confirmation.resource_deletion', resource: Note)
+sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully destroyed.\x27/I18n.t(\x27confirmation\.resource_deletion\x27, resource: Note)/;p;}' app/controllers/notes_controller.rb
+
+# replace pluralize(note.errors.count, "error") %> prohibited this note from being saved: with I18n.t 'errors.messages.not_saved.other', count: note.errors.count, resource: Note%>
+sed -ni 'H;${x;s/^\n//;s/pluralize(note\.errors\.count, "error") %> prohibited this note from being saved:/I18n\.t \x27errors\.messages\.not_saved\.other\x27, count: note\.errors\.count, resource: Note%>/;p;}' app/views/notes/_form.html.erb
