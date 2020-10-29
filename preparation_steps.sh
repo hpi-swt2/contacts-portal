@@ -86,55 +86,58 @@ sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/vie
 # styling
 #
 
-# replace app/assets/stylesheets/application.css with a scss file, that imports bootstrap
+# replace app/assets/stylesheets/application.css with a scss file, to import bootstrap
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
+
+# remove css specifics that do not apply to scss
 sed -ni 'H;${x;s/^\n//;s/\n \*\n \*= require_tree \.\n \*= require_self/\n/;p;}' app/assets/stylesheets/application.scss
 
 # add bootstrap variables and import bootstrap
-SCSSLines=(
-    ""
-    "// Remove all the \*= require and \*= require_tree statements from the Sass file."
-    "// Instead, use @import to import Sass files."
-    "// Do not use \*= require in Sass or your other stylesheets will not be "
-    "// able to access the Bootstrap mixins and variables."
-    "// See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails"
-    ""
-    "// Custom bootstrap variables must be set or *before* bootstrap is imported"
-    "// https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss"
-    "\$primary: #dd6108;"
-    "\$primary-active: #ef8d47;"
-    "\$primary-hover: #cc5908;"
-    "\$danger: #c60505;"
-    "\$success: #00911f;"
-    "// \$secondary: #dd6108;"
-    "// \$success: #dd6108;"
-    "// \$info: #dd6108;"
-    "// \$warning: #dd6108;"
-    "// \$danger: #dd6108;"
-    "// \$light: #dd6108;"
-    "// \$dark: #dd6108;"
-    "// https://github.com/twbs/bootstrap-rubygem"
-    "@import \x27bootstrap\x27;"
-    "// https://github.com/bokmann/font-awesome-rails"
-    "@import \x27font-awesome\x27;"
-)
-for line in "${SCSSLines[@]}"; do
-    echo ${line} >> app/assets/stylesheets/application.scss
-done
+applicationStylesheet="
 
+// Remove all the *= require and *= require_tree statements from the Sass file.
+// Instead, use @import to import Sass files.
+// Do not use *= require in Sass or your other stylesheets will not be 
+// able to access the Bootstrap mixins and variables.
+// See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
+// Custom bootstrap variables must be set or *before* bootstrap is imported
+// https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss
+\$primary: #dd6108;
+\$primary-active: #ef8d47;
+\$primary-hover: #cc5908;
+\$danger: #c60505;
+\$success: #00911f;
+// $secondary: #dd6108;
+// $success: #dd6108;
+// $info: #dd6108;
+// \$warning: #dd6108;
+// \$danger: #dd6108;
+// \$light: #dd6108;
+// \$dark: #dd6108;
+// https://github.com/twbs/bootstrap-rubygem
+@import 'bootstrap';
+// https://github.com/bokmann/font-awesome-rails
+@import 'font-awesome';"
+
+printf '%s' "${applicationStylesheet}" >> app/assets/stylesheets/application.scss
+
+#
 # configuring i18n
+#
 
 # remove hello world string from english dictionary
 sed -ni 'H;${x;s/^\n//;s/\n  hello: \"Hello world\"//;p;}' config/locales/en.yml
 
 # add english strings
-sed -ni 'H;${x;s/^\n//;s/$/\n  questions:/;p;}' config/locales/en.yml
-sed -ni 'H;${x;s/^\n//;s/$/\n    confirmation: \x27Are you sure?\x27/;p;}' config/locales/en.yml
-sed -ni 'H;${x;s/^\n//;s/$/\n  confirmation:/;p;}' config/locales/en.yml
-sed -ni 'H;${x;s/^\n//;s/$/\n    resource_creation: \x27%{resource} was successfully created\.\x27/;p;}' config/locales/en.yml
-sed -ni 'H;${x;s/^\n//;s/$/\n    resource_deletion: \x27%{resource} was successfully deleted\.\x27/;p;}' config/locales/en.yml
-sed -ni 'H;${x;s/^\n//;s/$/\n    resource_update: \x27%{resource} was successfully updated\.\x27/;p;}' config/locales/en.yml
+englishDictionary="
+  questions:
+    confirmation: 'Are you sure?'
+  confirmation:
+    resource_creation: '%{resource} was successfully created.'
+    resource_deletion: '%{resource} was successfully deleted.'
+    resource_update: '%{resource} was successfully updated.'"
 
+printf '%s' "${englishDictionary}" >> config/locales/en.yml
 
 # replace 'Are you sure?' with I18n.t('questions.confirmation')
 sed -ni 'H;${x;s/^\n//;s/\x27Are you sure?\x27/I18n\.t(\x27questions\.confirmation\x27)/;p;}' app/views/notes/index.html.erb
@@ -150,3 +153,25 @@ sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully destroyed.\x27/I18n.t(\x27con
 
 # replace pluralize(note.errors.count, "error") %> prohibited this note from being saved: with I18n.t 'errors.messages.not_saved.other', count: note.errors.count, resource: Note%>
 sed -ni 'H;${x;s/^\n//;s/pluralize(note\.errors\.count, "error") %> prohibited this note from being saved:/I18n\.t \x27errors\.messages\.not_saved\.other\x27, count: note\.errors\.count, resource: Note%>/;p;}' app/views/notes/_form.html.erb
+
+#
+# use factory bot
+#
+
+# add user factory
+userFactory="FactoryBot.define do
+  factory :user do
+    email { random_name + '@rolodex-portal.de' }
+    password { 'password' }
+    password_confirmation { 'password' }
+  end
+end
+
+def random_name
+  ('a'..'z').to_a.shuffle.join
+end"
+
+printf '%s' "${userFactory}" > spec/factories/users.rb
+
+# add user creation to note factory
+sed -ni 'H;${x;s/^\n//;s/nil/FactoryBot\.create(:user)/;p;}' spec/factories/notes.rb

@@ -11,9 +11,10 @@
  * It is generally better to create a new file per style scope.
 
  */
-// Remove all the \*= require and \*= require_tree statements from the Sass file.
+
+// Remove all the *= require and *= require_tree statements from the Sass file.
 // Instead, use @import to import Sass files.
-// Do not use \*= require in Sass or your other stylesheets will not be
+// Do not use *= require in Sass or your other stylesheets will not be
 // able to access the Bootstrap mixins and variables.
 // See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
 
@@ -32,6 +33,6 @@ $success: #00911f;
 // $light: #dd6108;
 // $dark: #dd6108;
 // https://github.com/twbs/bootstrap-rubygem
-@import "bootstrap";
+@import 'bootstrap';
 // https://github.com/bokmann/font-awesome-rails
-@import "font-awesome";
+@import 'font-awesome';
