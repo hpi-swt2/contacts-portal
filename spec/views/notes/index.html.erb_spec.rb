@@ -3,16 +3,8 @@ require 'rails_helper'
 RSpec.describe "notes/index", type: :view do
   before(:each) do
     assign(:notes, [
-      Note.create!(
-        title: "Title",
-        content: "MyText",
-        user: nil
-      ),
-      Note.create!(
-        title: "Title",
-        content: "MyText",
-        user: nil
-      )
+      FactoryBot.create(:note),
+      FactoryBot.create(:note)
     ])
   end
 

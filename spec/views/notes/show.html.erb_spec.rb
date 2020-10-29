@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "notes/show", type: :view do
   before(:each) do
-    @note = assign(:note, Note.create!(
-      title: "Title",
-      content: "MyText",
-      user: nil
-    ))
+    @note = FactoryBot.create(:note)
   end
 
   it "renders attributes in <p>" do

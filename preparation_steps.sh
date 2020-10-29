@@ -175,3 +175,9 @@ printf '%s' "${userFactory}" > spec/factories/users.rb
 
 # add user creation to note factory
 sed -ni 'H;${x;s/^\n//;s/nil/FactoryBot\.create(:user)/;p;}' spec/factories/notes.rb
+
+# use FactoryBot in note view tests
+sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"MyString\",\n      content: \"MyText\",\n      user: nil\n    ))/FactoryBot\.create(:note)/;p;}' spec/views/notes/edit.html.erb_spec.rb
+sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        content: \"MyText\",\n        user: nil\n      )/FactoryBot\.create(:note)/;p;}' spec/views/notes/index.html.erb_spec.rb
+sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        content: \"MyText\",\n        user: nil\n      )/FactoryBot\.create(:note)/;p;}' spec/views/notes/index.html.erb_spec.rb
+sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"Title\",\n      content: \"MyText\",\n      user: nil\n    ))/FactoryBot\.create(:note)/;p;}' spec/views/notes/show.html.erb_spec.rb
