@@ -65,5 +65,18 @@ build-iPhoneSimulator/
 yarn-debug.log*
 .yarn-integrity
 
-# ignore generated logs
-/log/
+# ignore logs and tmp files
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore database entries
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/db/*.sqlite3-[0-9]*
+
+# Ignore testing specific files
+*.rbc
+capybara-*.html
+.rspec

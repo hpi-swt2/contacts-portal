@@ -88,7 +88,7 @@ sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27home#index\x27\n&/;p;}' config/rout
 #
 
 # remove notes helper spec. We don't have any note helpers so we don't need to test them
-rm spec/helpers/notes_helper_spec.rb
+# rm spec/helpers/notes_helper_spec.rb
 
 # remove notice from app/view/notes/index.html.erb and app/view/notes/show.html.erb, as it is already stated in app/views/layouts/application.html.erb
 sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/index.html.erb
@@ -170,7 +170,13 @@ sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully destroyed.\x27/I18n.t(\x27con
 sed -ni 'H;${x;s/^\n//;s/pluralize(note\.errors\.count, "error") %> prohibited this note from being saved:/I18n\.t \x27errors\.messages\.not_saved\.other\x27, count: note\.errors\.count, resource: Note%>/;p;}' app/views/notes/_form.html.erb
 
 #
-# use factory bot
+# install rspec files
+#
+
+bundle exec rails generate rspec:install
+
+#
+# use factory bot for test instance generation
 #
 
 # add user factory
