@@ -12,12 +12,14 @@
 
  */
 
-// Remove all the *= require and *= require_tree statements from the Sass file.
-// Instead, use @import to import Sass files.
-// Do not use *= require in Sass or your other stylesheets will not be
-// able to access the Bootstrap mixins and variables.
-// See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
-
+/*
+ * Remove all the *= require and *= require_tree statements from the Sass file.
+ * Instead, use @import to import Sass files.
+ * Do not use *= require in Sass or your other stylesheets will not be 
+ * able to access the Bootstrap mixins and variables.
+ * See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
+ */
+ 
 // Custom bootstrap variables must be set or *before* bootstrap is imported
 // https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss
 $primary: #dd6108;
@@ -32,6 +34,7 @@ $success: #00911f;
 // $danger: #dd6108;
 // $light: #dd6108;
 // $dark: #dd6108;
+
 // https://github.com/twbs/bootstrap-rubygem
 @import 'bootstrap';
 // https://github.com/bokmann/font-awesome-rails

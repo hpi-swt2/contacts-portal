@@ -24,12 +24,6 @@ yes n | bundle exec rails new . --skip-spring --skip-listen
 
 bundle exec rails generate devise:install
 
-# add 'config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }' to 'config/environments/development.rb'
-sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { host: \x27localhost\x27, port: 3000 }\n&/;p;}' config/environments/development.rb
-
-# add link to devise docs to routes configuration
-sed -ni 'H;${x;s/^\n//;s/devise_for :users/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' config/routes.rb
-
 # preparate  the application layout file's body to contain the follwing:
 # <div class="container-fluid">
 #   <p class="notice"><%= notice %></p>
@@ -45,6 +39,12 @@ bundle exec rails generate devise user
 
 # generate user views
 bundle exec rails generate devise:views user
+
+# add 'config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }' to 'config/environments/development.rb'
+sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { host: \x27localhost\x27, port: 3000 }\n&/;p;}' config/environments/development.rb
+
+# add link to devise docs to routes configuration
+sed -ni 'H;${x;s/^\n//;s/devise_for :users/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' config/routes.rb
 
 #
 # generate note
@@ -106,12 +106,14 @@ sed -ni 'H;${x;s/^\n//;s/\n \*\n \*= require_tree \.\n \*= require_self/\n/;p;}'
 
 # add bootstrap variables and import bootstrap
 applicationStylesheet="
-
-// Remove all the *= require and *= require_tree statements from the Sass file.
-// Instead, use @import to import Sass files.
-// Do not use *= require in Sass or your other stylesheets will not be 
-// able to access the Bootstrap mixins and variables.
-// See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
+/*
+ * Remove all the *= require and *= require_tree statements from the Sass file.
+ * Instead, use @import to import Sass files.
+ * Do not use *= require in Sass or your other stylesheets will not be 
+ * able to access the Bootstrap mixins and variables.
+ * See: https://github.com/twbs/bootstrap-rubygem#a-ruby-on-rails
+ */
+ 
 // Custom bootstrap variables must be set or *before* bootstrap is imported
 // https://github.com/twbs/bootstrap-rubygem/blob/master/assets/stylesheets/bootstrap/_variables.scss
 \$primary: #dd6108;
@@ -119,17 +121,19 @@ applicationStylesheet="
 \$primary-hover: #cc5908;
 \$danger: #c60505;
 \$success: #00911f;
-// $secondary: #dd6108;
-// $success: #dd6108;
-// $info: #dd6108;
+// \$secondary: #dd6108;
+// \$success: #dd6108;
+// \$info: #dd6108;
 // \$warning: #dd6108;
 // \$danger: #dd6108;
 // \$light: #dd6108;
 // \$dark: #dd6108;
+
 // https://github.com/twbs/bootstrap-rubygem
 @import 'bootstrap';
 // https://github.com/bokmann/font-awesome-rails
-@import 'font-awesome';"
+@import 'font-awesome';
+"
 
 printf '%s' "${applicationStylesheet}" >> app/assets/stylesheets/application.scss
 
@@ -141,8 +145,7 @@ printf '%s' "${applicationStylesheet}" >> app/assets/stylesheets/application.scs
 sed -ni 'H;${x;s/^\n//;s/\n  hello: \"Hello world\"//;p;}' config/locales/en.yml
 
 # add english strings
-englishDictionary="
-  questions:
+englishDictionary="  questions:
     confirmation: 'Are you sure?'
   confirmation:
     resource_creation: '%{resource} was successfully created.'
