@@ -1,0 +1,11 @@
+<div class="jumbotron">
+  <h1 class="display-4">Rolodex Portal</h1>
+  <p class="lead">A Portal for organizing and administering contacts.</p>
+  <hr class="my-4">
+  <p>It comes with many very good features.</p>
+  <p class="lead">
+    <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+    <%= link_to (fa_icon 'sign-in', text: 'Log-In'), new_user_session_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to (fa_icon 'user-plus', text: 'Sign-Up'), new_user_registration_path, class: 'btn btn-secondary btn-lg' %>
+  </p>
+</div>

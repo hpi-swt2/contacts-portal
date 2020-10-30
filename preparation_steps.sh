@@ -27,9 +27,6 @@ bundle exec rails generate devise:install
 # add 'config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }' to 'config/environments/development.rb'
 sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { host: \x27localhost\x27, port: 3000 }\n&/;p;}' config/environments/development.rb
 
-# add 'root to: "devise/sessions#new"' to config/routes.rb
-sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27devise\/sessions#new\x27\n&/;p;}' config/routes.rb
-
 # add link to devise docs to routes configuration
 sed -ni 'H;${x;s/^\n//;s/devise_for :users/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' config/routes.rb
 
@@ -63,17 +60,32 @@ sed -ni 'H;${x;s/^\n//;s/end$/  # The dependent: option allows to specify that a
 sed -ni 'H;${x;s/^\n//;s/devise :database_authenticatable, :registerable,/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' app/models/user.rb
 
 #
-# migrate database
+# generate landing page
 #
 
-bundle exec rails db:migrate
+bundle exec rails generate controller home index
+
+# write view file
+homeViewIndex="<div class=\"jumbotron\">
+  <h1 class=\"display-4\">Rolodex Portal</h1>
+  <p class=\"lead\">A Portal for organizing and administering contacts.</p>
+  <hr class=\"my-4\">
+  <p>It comes with many very good features.</p>
+  <p class=\"lead\">
+    <%# fa_icon helper: https://github.com/bokmann/font-awesome-rails %>
+    <%= link_to (fa_icon 'sign-in', text: 'Log-In'), new_user_session_path, class: 'btn btn-primary btn-lg' %>
+    <%= link_to (fa_icon 'user-plus', text: 'Sign-Up'), new_user_registration_path, class: 'btn btn-secondary btn-lg' %>
+  </p>
+</div>"
+
+printf '%s' "${homeViewIndex}" > app/views/home/index.html.erb
+
+# add root to: 'home#index' to config/routes.rb
+sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27home#index\x27\n&/;p;}' config/routes.rb
 
 #
 # cleanup
 #
-
-# remove Rakefile
-rm Rakefile
 
 # remove notes helper spec. We don't have any note helpers so we don't need to test them
 rm spec/helpers/notes_helper_spec.rb
@@ -181,3 +193,9 @@ sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"MyString\"
 sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        content: \"MyText\",\n        user: nil\n      )/FactoryBot\.create(:note)/;p;}' spec/views/notes/index.html.erb_spec.rb
 sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        content: \"MyText\",\n        user: nil\n      )/FactoryBot\.create(:note)/;p;}' spec/views/notes/index.html.erb_spec.rb
 sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"Title\",\n      content: \"MyText\",\n      user: nil\n    ))/FactoryBot\.create(:note)/;p;}' spec/views/notes/show.html.erb_spec.rb
+
+#
+# migrate database
+#
+
+bundle exec rails db:migrate
