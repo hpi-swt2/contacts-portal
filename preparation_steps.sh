@@ -204,6 +204,66 @@ sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        cont
 sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"Title\",\n      content: \"MyText\",\n      user: nil\n    ))/FactoryBot\.create(:note)/;p;}' spec/views/notes/show.html.erb_spec.rb
 
 #
+# write example tests
+#
+
+# note model tests
+noteModelSpec="require 'rails_helper'
+
+RSpec.describe Note, type: :model do
+  before(:each) do
+    @note = FactoryBot.build(:note)
+  end
+
+  it \"is creatable using a Factory\" do
+    expect(@note).to be_valid
+  end
+
+  it \"is not valid without a title\" do
+    @note.title = \"\"
+    expect(@note).not_to be_valid
+  end
+
+  it \"is not valid without a content\" do
+    @note.content = \"\"
+    expect(@note).not_to be_valid
+  end
+
+  it \"is not valid without a user\" do
+    @note.user = nil
+    expect(@note).not_to be_valid
+  end
+
+  it \"persists a user\" do
+    expect(@note.user).to be_instance_of(User)
+  end
+end"
+
+printf '%s' "${noteModelSpec}" > spec/models/note_spec.rb
+
+# make note model pass the tests by adding attribute validation
+sed -ni 'H;${x;s/^\n//;s/class Note < ApplicationRecord/&\n  validates :title, presence: true\n  validates :content, presence: true\n  validates :user, presence: true\n/;p;}' app/models/note.rb
+
+# notes index view tests
+noteViewIndexSpec="require 'rails_helper'
+
+RSpec.describe \"notes/index\", type: :view do
+  before(:each) do
+    @notes = assign(:notes, FactoryBot.create_list(:note, 3))
+  end
+
+  it \"renders a list of notes\" do
+    render
+    for note in @notes do
+      assert_select \"tr>td\", text: note.title
+      assert_select \"tr>td\", text: note.content
+    end
+  end
+end"
+
+printf '%s' "${noteViewIndexSpec}" > spec/views/notes/index.html.erb_spec.rb
+
+#
 # migrate database
 #
 
