@@ -13,14 +13,13 @@
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/notes", type: :request do
-  # Note. As you add validations to Note, be sure to
-  # adjust the attributes here as well.
+  # As you add validations to the `Note` model, be sure to update the factory as well
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:note, user_id: FactoryBot.create(:user).id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    FactoryBot.attributes_for(:note, user_id: nil, title: '')
   }
 
   describe "GET /index" do
@@ -85,14 +84,14 @@ RSpec.describe "/notes", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {title: valid_attributes[:title] + ' updated!'}
       }
 
       it "updates the requested note" do
         note = Note.create! valid_attributes
         patch note_url(note), params: { note: new_attributes }
         note.reload
-        skip("Add assertions for updated state")
+        expect(note.title).to eq(new_attributes[:title])
       end
 
       it "redirects to the note" do
