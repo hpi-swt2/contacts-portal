@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Note, type: :model do
   before(:each) do
-    @note = FactoryBot.build(:note)
+    @note = FactoryBot.create(:note)
   end
 
   it "is creatable using a Factory" do
@@ -26,5 +26,11 @@ RSpec.describe Note, type: :model do
 
   it "persists a user" do
     expect(@note.user).to be_instance_of(User)
+  end
+
+  it "can be destroyed without interfering with the connected user" do
+    user = @note.user
+    expect { @note.destroy }.to_not raise_error
+    expect { user.reload }.to_not raise_error
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before (:each) do
-    @user = FactoryBot.create(:user)
+    @user = FactoryBot.build(:user)
   end
 
   it "is creatable using a factory" do
@@ -17,9 +17,5 @@ RSpec.describe User, type: :model do
   it "is not valid without a password" do
     @user.password = ""
     expect(@user).not_to be_valid
-  end
-
-  it "can be destroyed" do
-    expect { @user.destroy }.to_not raise_error
   end
 end
