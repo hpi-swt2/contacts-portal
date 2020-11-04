@@ -224,7 +224,7 @@ RSpec.describe Note, type: :model do
     expect(@note).not_to be_valid
   end
 
-  it \"is not valid without a content\" do
+  it \"is not valid without content\" do
     @note.content = \"\"
     expect(@note).not_to be_valid
   end
