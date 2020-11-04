@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "notes/new", type: :view do
   before(:each) do
-    assign(:note, Note.new(
-      title: "MyString",
-      content: "MyText",
-      user: nil
-    ))
+    assign(:note, FactoryBot.build(:note))
   end
 
   it "renders new note form" do
