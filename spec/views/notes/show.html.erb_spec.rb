@@ -5,10 +5,10 @@ RSpec.describe "notes/show", type: :view do
     @note = FactoryBot.create(:note)
   end
 
-  it "renders attributes in <p>" do
+  it "shows the details of a note" do
     render
-    expect(rendered).to match(/Title/)
-    expect(rendered).to match(/MyText/)
-    expect(rendered).to match(//)
+    expect(rendered).to match(@note.title)
+    expect(rendered).to match(@note.content)
+    expect(rendered).to match(@note.user.email)
   end
 end

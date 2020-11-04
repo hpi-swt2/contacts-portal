@@ -10,7 +10,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @note.user_id %>
+  <%= @note.user.email %>
 </p>
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
