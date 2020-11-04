@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    email { random_name + '@rolodex-portal.de' }
+    email { random_name + '@example.com' }
     password { 'password' }
     password_confirmation { 'password' }
   end
