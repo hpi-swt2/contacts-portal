@@ -18,4 +18,8 @@ RSpec.describe User, type: :model do
     @user.password = ""
     expect(@user).not_to be_valid
   end
+
+  it "can be destroyed" do
+    expect { @user.destroy }.to_not raise_error
+  end
 end
