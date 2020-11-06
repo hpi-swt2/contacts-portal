@@ -264,6 +264,22 @@ end"
 printf '%s' "${noteViewIndexSpec}" > spec/views/notes/index.html.erb_spec.rb
 
 #
+# Add information to the README
+#
+
+ModelDiagramGenerationInformation="
+## Generating a Model Class Diagram with RubyMine
+
+RubyMine, an IntelliJ-IDE designed for ruby projects supports generating an uml class diagram from the database scheme. An Instruction can be found here: [https://www.jetbrains.com/help/ruby/creating-diagrams.html#creating-explain-query-plan](https://www.jetbrains.com/help/ruby/creating-diagrams.html#creating-explain-query-plan).
+Currently, a file named \`\`\`rolodex-portal-model-class-diagram.png\`\`\` in the projects root folder is linked in this README. So by overwriting this file, or adding a new one to the README, the current model dependencies can be updated.
+
+## Current Model Class Diagram
+
+![](rolodex-portal-model-class-diagram.png)"
+
+printf '%s' "${ModelDiagramGenerationInformation}" >> ./README.md
+
+#
 # migrate database
 #
 
