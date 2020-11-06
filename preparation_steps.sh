@@ -133,9 +133,31 @@ applicationStylesheet="
 @import 'bootstrap';
 // https://github.com/bokmann/font-awesome-rails
 @import 'font-awesome';
+
+@import 'notes';
+@import 'home';
 "
 
 printf '%s' "${applicationStylesheet}" >> app/assets/stylesheets/application.scss
+
+notesStylesheet="$bgcolor: deeppink;
+$basicFontSize: 1.5em;
+
+table-elements {
+    background-color: $bgcolor;
+}
+
+th {
+    @extend table-elements;
+    font-size: $basicFontSize + 0.5em;
+}
+
+td {
+    @extend table-elements;
+    font-size: $basicFontSize;
+}"
+
+printf '%s' "${notesStylesheet}" >> app/assets/stylesheets/notes.scss
 
 #
 # configuring i18n

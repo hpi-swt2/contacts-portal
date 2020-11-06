@@ -1,3 +1,20 @@
 // Place all the styles related to the notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+$bgcolor: deeppink;
+$basicFontSize: 1.5em;
+
+table-elements {
+    background-color: $bgcolor;
+}
+
+th {
+    @extend table-elements;
+    font-size: $basicFontSize + 0.5em;
+}
+
+td {
+    @extend table-elements;
+    font-size: $basicFontSize;
+}
