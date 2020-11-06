@@ -3,24 +3,24 @@
 # Many manual adaptations have been automated with sed to use this script in case we need to re-build the whole skeleton.
 # for a reference on sed statements can be cunstructed, see: https://stackoverflow.com/questions/6739258/how-do-i-add-a-line-of-text-to-the-middle-of-a-file-using-bash
 
-#
-# create a folder to install gems locally
-#
+###########################################
+# create a folder to install gems locally #
+###########################################
 
 mkdir vendor
 mkdir vendor/bundle
 bundle config set path vendor/bundle
 bundle install
 
-#
-# generate basic rails application
-#
+####################################
+# generate basic rails application #
+####################################
 
 yes n | bundle exec rails new . --skip-spring --skip-listen 
 
-#
-# create devise user
-#
+######################
+# create devise user #
+######################
 
 bundle exec rails generate devise:install
 
@@ -46,9 +46,9 @@ sed -ni 'H;${x;s/^\n//;s/end$/  config.action_mailer.default_url_options = { hos
 # add link to devise docs to routes configuration
 sed -ni 'H;${x;s/^\n//;s/devise_for :users/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' config/routes.rb
 
-#
-# generate note
-#
+#################
+# generate note #
+#################
 
 # generate note scaffold
 bundle exec rails generate scaffold note title:string content:text user:references
@@ -59,9 +59,9 @@ sed -ni 'H;${x;s/^\n//;s/end$/  # The dependent: option allows to specify that a
 # add link to devise documentation
 sed -ni 'H;${x;s/^\n//;s/devise :database_authenticatable, :registerable,/# https:\/\/github\.com\/heartcombo\/devise\/wiki\/\n  &/;p;}' app/models/user.rb
 
-#
-# generate landing page
-#
+#########################
+# generate landing page #
+#########################
 
 bundle exec rails generate controller home index
 
@@ -83,9 +83,9 @@ printf '%s' "${homeViewIndex}" > app/views/home/index.html.erb
 # add root to: 'home#index' to config/routes.rb
 sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27home#index\x27\n&/;p;}' config/routes.rb
 
-#
-# cleanup
-#
+###########
+# cleanup #
+###########
 
 # remove notes helper spec. We don't have any note helpers so we don't need to test them
 # rm spec/helpers/notes_helper_spec.rb
@@ -94,9 +94,9 @@ sed -ni 'H;${x;s/^\n//;s/end$/  root to: \x27home#index\x27\n&/;p;}' config/rout
 sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/index.html.erb
 sed -ni 'H;${x;s/^\n//;s/^<p id=\"notice\"><%= notice %><\/p>\n\n//;p;}' app/views/notes/show.html.erb
 
-#
-# styling
-#
+###########
+# styling #
+###########
 
 # replace app/assets/stylesheets/application.css with a scss file, to import bootstrap
 mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
@@ -159,9 +159,9 @@ td {
 
 printf '%s' "${notesStylesheet}" >> app/assets/stylesheets/notes.scss
 
-#
-# configuring i18n
-#
+####################
+# configuring i18n #
+####################
 
 # remove hello world string from english dictionary
 sed -ni 'H;${x;s/^\n//;s/\n  hello: \"Hello world\"//;p;}' config/locales/en.yml
@@ -191,15 +191,12 @@ sed -ni 'H;${x;s/^\n//;s/\x27Note was successfully destroyed.\x27/I18n.t(\x27con
 # replace pluralize(note.errors.count, "error") %> prohibited this note from being saved: with I18n.t 'errors.messages.not_saved.other', count: note.errors.count, resource: Note%>
 sed -ni 'H;${x;s/^\n//;s/pluralize(note\.errors\.count, "error") %> prohibited this note from being saved:/I18n\.t \x27errors\.messages\.not_saved\.other\x27, count: note\.errors\.count, resource: Note%>/;p;}' app/views/notes/_form.html.erb
 
-#
+###########
+# testing #
+###########
+
 # install rspec files
-#
-
 bundle exec rails generate rspec:install
-
-#
-# use factory bot for test instance generation
-#
 
 # add user factory
 userFactory="FactoryBot.define do
@@ -225,11 +222,7 @@ sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        cont
 sed -ni 'H;${x;s/^\n//;s/Note\.create!(\n        title: \"Title\",\n        content: \"MyText\",\n        user: nil\n      )/FactoryBot\.create(:note)/;p;}' spec/views/notes/index.html.erb_spec.rb
 sed -ni 'H;${x;s/^\n//;s/assign(:note, Note\.create!(\n      title: \"Title\",\n      content: \"MyText\",\n      user: nil\n    ))/FactoryBot\.create(:note)/;p;}' spec/views/notes/show.html.erb_spec.rb
 
-#
-# write example tests
-#
-
-# note model tests
+# write note model tests
 noteModelSpec="require 'rails_helper'
 
 RSpec.describe Note, type: :model do
@@ -266,7 +259,7 @@ printf '%s' "${noteModelSpec}" > spec/models/note_spec.rb
 # make note model pass the tests by adding attribute validation
 sed -ni 'H;${x;s/^\n//;s/class Note < ApplicationRecord/&\n  validates :title, presence: true\n  validates :content, presence: true\n  validates :user, presence: true\n/;p;}' app/models/note.rb
 
-# notes index view tests
+# write notes index view tests
 noteViewIndexSpec="require 'rails_helper'
 
 RSpec.describe \"notes/index\", type: :view do
@@ -285,9 +278,9 @@ end"
 
 printf '%s' "${noteViewIndexSpec}" > spec/views/notes/index.html.erb_spec.rb
 
-#
-# Add information to the README
-#
+#################################
+# Add information to the README #
+#################################
 
 ModelDiagramGenerationInformation="
 ## Generating a Model Class Diagram with RubyMine
@@ -301,8 +294,8 @@ Currently, a file named \`\`\`rolodex-portal-model-class-diagram.png\`\`\` in th
 
 printf '%s' "${ModelDiagramGenerationInformation}" >> ./README.md
 
-#
-# migrate database
-#
+####################
+# migrate database #
+####################
 
 bundle exec rails db:migrate
