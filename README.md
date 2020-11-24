@@ -38,19 +38,20 @@ You can find the currently deployed main version at [https://connections-portal-
 
 ### Testing
 * `bundle exec rspec` Run the full test suite
-* `-f doc` Nicer test output
-* `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
-* `-e 'search keyword in test name'` Specify what tests to run dynamically
+  * `-f doc` Nicer test output
+  * `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
+  * `-e 'search keyword in test name'` Specify what tests to run dynamically
 * `bundle exec rspec --profile` Examine run time of tests
 
 ### Linting
+* `rake factory_bot:lint` Create each factory and catch any exceptions raised during the creation process (defined in `lib/tasks/factory_bot.rake`)
 * `bundle exec rubocop` Use the static code analyzer [RuboCop](https://github.com/rubocop-hq) to find possible issues (based on the community [Ruby style guide](https://github.com/rubocop-hq/ruby-style-guide)).
-* `--auto-correct` to fix what can be fixed automatically.
-* RuboCop's behavior can be [controlled](https://docs.rubocop.org/en/latest/configuration) using `.rubocop.yml`
+  * `--auto-correct` to fix what can be fixed automatically.
+  * RuboCop's behavior can be [controlled](https://docs.rubocop.org/en/latest/configuration) using `.rubocop.yml`
 
 ### Debugging
 * `rails c --sandbox` Test out some code in the Rails console without changing any data
- `rails dbconsole` Starts the CLI of the database you're using
+* `rails dbconsole` Starts the CLI of the database you're using
 * `bundle exec rails routes` Show all the routes (and their names) of the application
 * `bundle exec rails about` Show stats on current Rails installation, including version numbers
 
