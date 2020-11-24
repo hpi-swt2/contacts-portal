@@ -8,8 +8,8 @@ RSpec.describe "notes/index", type: :view do
   it "renders a list of notes" do
     render
     for note in @notes do
-      assert_select "tr>td", text: note.title
-      assert_select "tr>td", text: note.content
+      expect(rendered).to match note.title
+      expect(rendered).to match note.content
     end
   end
 end

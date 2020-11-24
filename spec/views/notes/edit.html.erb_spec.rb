@@ -7,14 +7,8 @@ RSpec.describe "notes/edit", type: :view do
 
   it "renders the edit note form" do
     render
-
-    assert_select "form[action=?][method=?]", note_path(@note), "post" do
-
-      assert_select "input[name=?]", "note[title]"
-
-      assert_select "textarea[name=?]", "note[content]"
-
-      assert_select "input[name=?]", "note[user_id]"
-    end
+    expect(rendered).to have_css 'form', count: 1
+    expect(rendered).to have_css "form[method=post][action=\"#{note_path(@note)}\"]"
+    expect(rendered).to have_css "input[type=submit]"
   end
 end
