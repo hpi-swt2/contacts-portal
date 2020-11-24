@@ -67,7 +67,7 @@ bundle exec rails generate controller home index
 
 # write view file
 homeViewIndex="<div class=\"jumbotron\">
-  <h1 class=\"display-4\">Rolodex Portal</h1>
+  <h1 class=\"display-4\">Connections Portal</h1>
   <p class=\"lead\">A Portal for organizing and administering contacts.</p>
   <hr class=\"my-4\">
   <p>It comes with many very good features.</p>
@@ -201,7 +201,7 @@ bundle exec rails generate rspec:install
 # add user factory
 userFactory="FactoryBot.define do
   factory :user do
-    email { random_name + '@rolodex-portal.de' }
+    email { random_name + '@example.com' }
     password { 'password' }
     password_confirmation { 'password' }
   end
@@ -316,11 +316,11 @@ ModelDiagramGenerationInformation="
 ## Generating a Model Class Diagram with RubyMine
 
 RubyMine, an IntelliJ-IDE designed for ruby projects supports generating an uml class diagram from the database scheme. An Instruction can be found here: [https://www.jetbrains.com/help/ruby/creating-diagrams.html#creating-explain-query-plan](https://www.jetbrains.com/help/ruby/creating-diagrams.html#creating-explain-query-plan).
-Currently, a file named \`\`\`rolodex-portal-model-class-diagram.png\`\`\` in the projects root folder is linked in this README. So by overwriting this file, or adding a new one to the README, the current model dependencies can be updated.
+Currently, a file named \`\`\`class-diagram.png\`\`\` in the projects root folder is linked in this README. So by overwriting this file, or adding a new one to the README, the current model dependencies can be updated.
 
 ## Current Model Class Diagram
 
-![](rolodex-portal-model-class-diagram.png)"
+![](class-diagram.png)"
 
 printf '%s' "${ModelDiagramGenerationInformation}" >> ./README.md
 
