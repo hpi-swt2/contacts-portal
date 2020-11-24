@@ -28,22 +28,25 @@ You can find the currently deployed main version at [https://connections-portal-
 
 ## Developer Guide
 
+### Cheat Sheets
+* [FactoryBot](https://devhints.io/factory_bot)
+* [Testing using Capybara](https://devhints.io/capybara)
+
 ### Setup
 * `bundle exec rails db:migrate RAILS_ENV=development && bundle exec rails db:migrate RAILS_ENV=test` Migrate both test and development databases
 * `bundle exec rails assets:clobber && bundle exec rails assets:precompile` Redo asset generation
 
 ### Testing
-* Run the full test suite: `bundle exec rspec`.
-* For nicer test output, use the option `-f doc`
+* `bundle exec rspec` Run the full test suite
+* `-f doc` Nicer test output
 * `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
-* Specify what tests to run dynamically using `-e 'search keyword in test name'`
+* `-e 'search keyword in test name'` Specify what tests to run dynamically
 * `bundle exec rspec --profile` Examine run time of tests
 
 ### Linting
-* [RuboCop](https://github.com/rubocop-hq) is a Ruby static code analyzer and formatter, based on the community [Ruby style guide](https://github.com/rubocop-hq/ruby-style-guide)
-* It is installed in the project. Run `bundle exec rubocop` to find possible issues.
-* Use `--auto-correct` to fix what can be fixed automatically.
-* The behavior of RuboCop can be [controlled](https://docs.rubocop.org/en/latest/configuration/) via a `.rubocop.yml` configuration file
+* `bundle exec rubocop` Use the static code analyzer [RuboCop](https://github.com/rubocop-hq) to find possible issues (based on the community [Ruby style guide](https://github.com/rubocop-hq/ruby-style-guide)).
+* `--auto-correct` to fix what can be fixed automatically.
+* RuboCop's behavior can be [controlled](https://docs.rubocop.org/en/latest/configuration) using `.rubocop.yml`
 
 ### Debugging
 * `rails c --sandbox` Test out some code in the Rails console without changing any data
