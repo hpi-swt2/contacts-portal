@@ -6,6 +6,11 @@
 
 A Ruby on Rails application for organizing and arranging networks, relationships and human connections.
 
+## Development Setup
+
+* `ruby --version && rails --version`
+* `bundle install && yarn install --check-files`
+
 ## Deployment
 
 The tested main branch and dev branch are automatically deployed to Heroku when all tests run successfully. 
