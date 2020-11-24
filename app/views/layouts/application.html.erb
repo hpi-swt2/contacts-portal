@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Connections Portal</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container-fluid">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if notice %><div class="alert alert-success notice" role="alert"><%= notice %></div><% end %>
+      <% if alert %><div class="alert alert-danger" role="alert"><%= alert %></div><% end %>
     </div>
     <div class="container-fluid">
-      <%= yield %>
+        <%= yield %>
     </div>
-  </body>
+</body>
+
 </html>
