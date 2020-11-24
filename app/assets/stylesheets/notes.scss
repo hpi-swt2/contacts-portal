@@ -2,8 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-$bgcolor: deeppink;
-$basicFontSize: 1.5em;
+$bgcolor: pink;
 
 table-elements {
     background-color: $bgcolor;
@@ -11,10 +10,8 @@ table-elements {
 
 th {
     @extend table-elements;
-    font-size: $basicFontSize + 0.5em;
 }
 
 td {
     @extend table-elements;
-    font-size: $basicFontSize;
 }
