@@ -4,20 +4,55 @@
 ![build: dev](https://github.com/hpi-swt2/connections-portal/workflows/CI_CD/badge.svg?branch=dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-A Ruby on Rails application for organizing and arranging networks, relationships and human connections.
+A web application for organizing and arranging networks, relationships and human connections, written in [Ruby on Rails](https://rubyonrails.org/).
+Created in the [Software Engineering II course](https://hpi.de/plattner/teaching/winter-term-2020-21/softwaretechnik-ii-agile-software-development-in-large-teams.html) at the HPI in Potsdam.
+
 
 ## Development Setup
 
-* `ruby --version && rails --version`
-* `bundle install && yarn install --check-files`
+* `ruby --version` Ensure Ruby v2.7.2 using [rbenv](https://github.com/rbenv/rbenv) or [RVM](http://rvm.io/)
+* `sqlite3 --version` Ensure [SQLite3 database installation](https://guides.rubyonrails.org/getting_started.html#installing-sqlite3)
+* `node --version; yarn -v` Ensure [Node.js and Yarn installation](https://guides.rubyonrails.org/getting_started.html#installing-node-js-and-yarn)
+* `bundle -v` Ensure [Bundler](https://rubygems.org/gems/bundler) installation (with `gem install bundler`)
+* `bundle install --without production && yarn install --check-files` Install dependencies
+* `rails db:migrate db:seed` Setup database, run migrations, seed the database with defaults
+* `rails s` Start the Rails development server (default: _localhost:3000_)
+* `bundle exec rspec` Run the tests (using the [RSpec](http://rspec.info/) test framework)
 
 ## Deployment
 
 The tested main branch and dev branch are automatically deployed to Heroku when all tests run successfully. 
-
 Further information on the test runs and deployments can be found in the Github-Actions tab.
 
 You can find the currently deployed main version at [https://connections-portal-main.herokuapp.com/](https://connections-portal-main.herokuapp.com/) and the currently deployed dev version at [https://connections-portal-dev.herokuapp.com/](https://connections-portal-dev.herokuapp.com/).
+
+## Developer Guide
+
+### Setup
+* `bundle exec rails db:migrate RAILS_ENV=development && bundle exec rails db:migrate RAILS_ENV=test` Migrate both test and development databases
+* `bundle exec rails assets:clobber && bundle exec rails assets:precompile` Redo asset generation
+
+### Testing
+* Run the full test suite: `bundle exec rspec`.
+* For nicer test output, use the option `-f doc`
+* `bundle exec rspec spec/<rest_of_file_path>.rb` Specify a folder or test file to run
+* Specify what tests to run dynamically using `-e 'search keyword in test name'`
+* `bundle exec rspec --profile` Examine run time of tests
+
+### Linting
+* [RuboCop](https://github.com/rubocop-hq) is a Ruby static code analyzer and formatter, based on the community [Ruby style guide](https://github.com/rubocop-hq/ruby-style-guide)
+* It is installed in the project. Run `bundle exec rubocop` to find possible issues.
+* Use `--auto-correct` to fix what can be fixed automatically.
+* The behavior of RuboCop can be [controlled](https://docs.rubocop.org/en/latest/configuration/) via a `.rubocop.yml` configuration file
+
+### Debugging
+* `rails c --sandbox` Test out some code in the Rails console without changing any data
+ `rails dbconsole` Starts the CLI of the database you're using
+* `bundle exec rails routes` Show all the routes (and their names) of the application
+* `bundle exec rails about` Show stats on current Rails installation, including version numbers
+
+### Generating
+* `rails g migration DoSomething` Create migration _db/migrate/*_DoSomething.rb_.
 
 ## Generating a Model Class Diagram with RubyMine
 
