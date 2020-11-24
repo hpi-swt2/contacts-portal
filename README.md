@@ -15,8 +15,9 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 * `node --version; yarn -v` Ensure [Node.js and Yarn installation](https://guides.rubyonrails.org/getting_started.html#installing-node-js-and-yarn)
 * `bundle -v` Ensure [Bundler](https://rubygems.org/gems/bundler) installation (with `gem install bundler`)
 * `bundle install --without production && yarn install --check-files` Install dependencies
-* `rails db:migrate db:seed` Setup database, run migrations, seed the database with defaults
-* `rails s` Start the Rails development server (default: _localhost:3000_)
+* `rails db:migrate` Setup the database, run migrations
+* `rake devise:create_demo_user` Create a demo user (note _email & password_)
+* `rails s` Start the Rails development server (default: _localhost:3000_) and log in using the demo credentials
 * `bundle exec rspec` Run the tests (using the [RSpec](http://rspec.info/) test framework)
 
 ## Deployment
@@ -50,6 +51,7 @@ You can find the currently deployed main version at [https://connections-portal-
   * RuboCop's behavior can be [controlled](https://docs.rubocop.org/en/latest/configuration) using `.rubocop.yml`
 
 ### Debugging
+* `save_and_open_page` within a test to inspect the state of a webpage in a browser
 * `rails c --sandbox` Test out some code in the Rails console without changing any data
 * `rails dbconsole` Starts the CLI of the database you're using
 * `bundle exec rails routes` Show all the routes (and their names) of the application
