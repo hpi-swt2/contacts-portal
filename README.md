@@ -17,6 +17,14 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 
 ## Development Setup
 
+### Vagrant
+* To create the machine, run `vagrant up`.
+* Enter the machine using `vagrant ssh`.
+* Go to the project directory `cd hpi-swt2`.
+* Finally start the rails dev server `rails s -b 0.0.0.0` (`-b 0.0.0.0` makes sure that you can reach the dev server locally).
+* Go to `http://localhost:3000` in your browser to view the page.
+
+### Local setup
 * `ruby --version` Ensure Ruby v2.7.2 using [rbenv](https://github.com/rbenv/rbenv) or [RVM](http://rvm.io/)
 * `sqlite3 --version` Ensure [SQLite3 database installation](https://guides.rubyonrails.org/getting_started.html#installing-sqlite3)
 * `node --version; yarn -v` Ensure [Node.js and Yarn installation](https://guides.rubyonrails.org/getting_started.html#installing-node-js-and-yarn)
