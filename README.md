@@ -18,10 +18,10 @@ Created in the [Software Engineering II course](https://hpi.de/plattner/teaching
 ## Development Setup
 
 ### Vagrant
-* To create the machine, run `vagrant up`.
+* To [create the VM](https://www.vagrantup.com/docs/cli/up), run `vagrant up` (based on the `Vagrantfile`).
 * Enter the machine using `vagrant ssh`.
 * Go to the project directory `cd hpi-swt2`.
-* Finally start the rails dev server `rails s -b 0.0.0.0` (`-b 0.0.0.0` makes sure that you can reach the dev server locally).
+* Start the dev server `rails s -b 0.0.0.0` (`-b ` / `--binding=IP` allows connections from outside the VM).
 * Go to `http://localhost:3000` in your browser to view the page.
 
 ### Local setup
