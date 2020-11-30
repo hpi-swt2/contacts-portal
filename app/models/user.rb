@@ -9,5 +9,16 @@ class User < ApplicationRecord
   # https://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html >> Deleting from Associations
   has_many :notes, dependent: :delete_all
 
+  VALID_STATUS_LIST = %w[available working].freeze
+
   validates :username, :email, presence: true
+  validates :current_status, inclusion: { in: VALID_STATUS_LIST }
+
+  after_initialize :init
+
+  attribute :current_status, :string, default: "available"
+
+  def init
+    self.username ||= email.split('@')[0]
+  end
 end
