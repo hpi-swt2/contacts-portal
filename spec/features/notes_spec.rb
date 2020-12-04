@@ -39,6 +39,6 @@ describe "Notes", type: :feature do
 
   def logout
     visit root_path
-    click_button "Log Out"
+    click_link "Log Out"
   end
 end
