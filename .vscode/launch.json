@@ -1,0 +1,39 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "RSpec - all",
+			"type": "Ruby",
+			"request": "launch",
+			"program": "${workspaceRoot}/bin/bundle",
+			"args": [
+				"exec", "rspec",
+				"-I",
+				"${workspaceRoot}"
+			]
+		},
+		{
+			"name": "RSpec - active spec file only",
+			"type": "Ruby",
+			"request": "launch",
+			"program": "${workspaceRoot}/bin/bundle",
+			"args": [
+				"exec", "rspec",
+				"-I",
+				"${workspaceRoot}",
+				"${file}"
+			],
+			"debuggerPort": "13000"
+		},
+		{
+			"name": "Rails server",
+			"type": "Ruby",
+			"request": "launch",
+			"program": "${workspaceRoot}/bin/rails",
+			"args": [
+				"server"
+			],
+			"debuggerPort": "13000"
+		}
+	]
+}

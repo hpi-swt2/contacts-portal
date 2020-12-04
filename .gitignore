@@ -70,4 +70,5 @@ capybara-*.html
 .rspec
 
 # Ignore editor configs
-/.vscode
+/.vscode/*
+!/.vscode/launch.json
