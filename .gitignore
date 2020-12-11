@@ -70,4 +70,5 @@ capybara-*.html
 .rspec
 
 # Ignore editor configs
+/.vagrant
 /.vscode
