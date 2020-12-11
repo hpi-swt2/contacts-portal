@@ -39,7 +39,7 @@ RSpec.describe "/notes", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       Note.create! valid_attributes
-      get notes_url, :params => { :current_user => {:id => @user.id}}
+      get notes_url
       expect(response).to be_successful
     end
   end
