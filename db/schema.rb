@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 2020_12_11_160500) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "contact_id"
+    t.index ["contact_id"], name: "index_users_users_on_contact_id"
+    t.index ["user_id"], name: "index_users_users_on_user_id"
+  end
+
   add_foreign_key "notes", "users"
   add_foreign_key "notes", "users", column: "creator_user_id"
 end
