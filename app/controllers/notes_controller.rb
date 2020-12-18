@@ -21,7 +21,6 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.creator_user_id = current_user.id
-
     if @note.save
       redirect_to @note, notice: I18n.t('confirmation.resource_creation', resource: Note)
     else
