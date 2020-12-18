@@ -8,6 +8,11 @@
       </path>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:feat" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
       <path>
@@ -37,19 +42,14 @@
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:feat" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/feat/private-notes" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:feat/private-notes" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8588eaf-42c0-4f89-92e7-87294dc22bea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/controllers/notes_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/notes_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/migrate/20201211160500_add_creator_user_to_notes.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/migrate/20201211160500_add_creator_user_to_notes.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spec/features/notes_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/features/notes_spec.rb" afterDir="false" />
-    </list>
+    <list default="true" id="c8588eaf-42c0-4f89-92e7-87294dc22bea" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -379,7 +379,7 @@
       <workItem from="1607590843388" duration="487000" />
       <workItem from="1607675507619" duration="2153000" />
       <workItem from="1608306050832" duration="536000" />
-      <workItem from="1608306639330" duration="4539000" />
+      <workItem from="1608306639330" duration="4893000" />
     </task>
     <servers />
   </component>
@@ -397,7 +397,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/feat/private-notes" />
+                        <option value="feat/private-notes" />
                       </list>
                     </value>
                   </entry>
@@ -451,6 +451,10 @@
     </state>
     <state width="1878" height="287" key="GridCell.Tab.1.right/0.25.1440.875/-211.-1055.1920.1055@-211.-1055.1920.1055" timestamp="1607709050070" />
     <state width="1878" height="287" key="GridCell.Tab.1.right/0.25.1440.875/-234.-1055.1920.1055@-234.-1055.1920.1055" timestamp="1608310852553" />
+    <state x="391" y="-821" width="670" height="58" key="search.everywhere.popup" timestamp="1608311370780">
+      <screen x="-234" y="-1055" width="1920" height="1055" />
+    </state>
+    <state x="391" y="-821" width="670" height="58" key="search.everywhere.popup/0.25.1440.875/-234.-1055.1920.1055@-234.-1055.1920.1055" timestamp="1608311370780" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/connections_portal@Notes_can_create_a_new_note.rcov" NAME="Notes can create a new note Coverage Results" MODIFIED="1608310260177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="connections-portal" />
