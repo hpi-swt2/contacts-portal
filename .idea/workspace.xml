@@ -50,9 +50,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8588eaf-42c0-4f89-92e7-87294dc22bea" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/connections-portal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/connections-portal.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/notes_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/notes_controller.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spec/features/notes_spec.rb" beforeDir="false" afterPath="$PROJECT_DIR$/spec/features/notes_spec.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,7 +388,7 @@
       <workItem from="1607675507619" duration="2153000" />
       <workItem from="1608306050832" duration="536000" />
       <workItem from="1608306639330" duration="5689000" />
-      <workItem from="1610117869514" duration="220000" />
+      <workItem from="1610117869514" duration="1018000" />
     </task>
     <servers />
   </component>

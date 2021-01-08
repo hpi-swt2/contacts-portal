@@ -3,7 +3,7 @@ class NotesController < ApplicationController
 
   # GET /notes
   def index
-    @notes = Note.where('creator_user_id = ?', current_user.id)
+    @notes = current_user.notes
   end
 
   # GET /notes/1

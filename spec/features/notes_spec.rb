@@ -29,12 +29,12 @@ describe "Notes", type: :feature do
     sign_in @alice
     #note is shown when alice is logged in
     visit notes_path
-    expect(page).to have_text(@note.title)
+    expect(page).to have_text(@another_note.title)
     sign_out @alice
     # note isn't shown when bob is logged in
     sign_in @bob
     visit notes_path
-    expect(page).not_to have_text(@note.title)
+    expect(page).not_to have_text(@another_note.title)
   end
 
 end
