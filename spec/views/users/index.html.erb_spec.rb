@@ -20,18 +20,18 @@ RSpec.describe "users/index", type: :view do
 
   it "does have a + button for not requested user" do
     render
-    expect(rendered).to have_css('form.button_to[action="/users/2/contact_requests"]')
+    expect(rendered).to have_css('form.button_to[action="/users/' + @users.second.id.to_s + '/contact_requests"]')
   end
 
   it "does not have a + button for already requested user" do
     @users.second.contact_requests << @users.first
     render
-    expect(rendered).not_to have_css('form.button_to[action="/users/2/contact_requests"]')
+    expect(rendered).not_to have_css('form.button_to[action="/users/' + @users.second.id.to_s + '/contact_requests"]')
   end
 
   it "does not have a + button for already existing contacts" do
     @users.first.contacts << @users.second
     render
-    expect(rendered).not_to have_css('form.button_to[action="/users/2/contact_requests"]')
+    expect(rendered).not_to have_css('form.button_to[action="/users/' + @users.second.id.to_s + '/contact_requests"]')
   end
 end
