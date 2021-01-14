@@ -10,7 +10,7 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
-      <% unless current_user.contacts.include? user or user.contact_requests.include? current_user %>
+      <% if not current_user.sent_contact_request(user) %>
       <td><%=  button_to '+', user_contact_requests_path(user), method: :post, id: user.id  %></td>
       <% end %>
     </tr>
