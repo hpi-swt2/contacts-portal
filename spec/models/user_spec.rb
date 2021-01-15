@@ -82,15 +82,15 @@ RSpec.describe User, type: :model do
 
   it "determines other users which the user has send a contact request to" do
     requested = FactoryBot.create(:user)
-    expect(@user.sent_contact_request(requested)).to be false
+    expect(@user.sent_contact_request?(requested)).to be false
     requested.contact_requests << @user
-    expect(@user.sent_contact_request(requested)).to be true
+    expect(@user.sent_contact_request?(requested)).to be true
   end
 
   it "determines other users which are in my contacts" do
     contact = FactoryBot.create(:user)
-    expect(@user.sent_contact_request(contact)).to be false
+    expect(@user.sent_contact_request?(contact)).to be false
     @user.contacts << contact
-    expect(@user.sent_contact_request(contact)).to be true
+    expect(@user.sent_contact_request?(contact)).to be true
   end
 end
