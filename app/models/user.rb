@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def sent_contact_request?(user)
-    (user.contact_requests.include? self) or (self.contacts.include? user)
+    (user.contact_requests.include? self) or (contacts.include? user)
   end
 
   def notes
