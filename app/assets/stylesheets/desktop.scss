@@ -42,3 +42,9 @@ $success: #00911f;
 
 // app/assets/stylesheets/notes.scss
 @import 'notes';
+
+
+.container {
+  max-width: unset;
+  padding-left: 15px;
+}
