@@ -8,6 +8,8 @@ html, body {
 }
 
 #dashboard {
+  box-sizing: border-box;
+  padding: 60px 0;
   height: 100%;
   display: flex;
   flex: auto;
