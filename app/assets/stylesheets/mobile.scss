@@ -43,3 +43,12 @@ $success: #00911f;
 // app/assets/stylesheets/notes.scss
 @import 'notes';
 // app/assets/stylesheets/home.scss
+html, body {
+  position:relative;
+  height: calc(100% - 48px); /* Subtract the height of the navbar, change if navbar has new design */
+}
+
+.container {
+  max-width: unset;
+  height: 100%;
+}
