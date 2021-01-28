@@ -48,6 +48,8 @@ html, body {
   height: calc(100% - 48px); /* Subtract the height of the navbar, change if navbar has new design */
 }
 
+//= require_tree
+
 .container {
   max-width: unset;
   height: 100%;
