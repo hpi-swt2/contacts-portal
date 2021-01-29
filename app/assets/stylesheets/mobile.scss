@@ -46,7 +46,7 @@ $content_size: calc(100% - 48px);
 // app/assets/stylesheets/home.scss
 html, body {
   position:relative;
-  height: $content_size; /* Subtract the height of the navbar, change if navbar has new design */
+  height: $content_size;  /* Subtract the height of the navbar, change if navbar has new design */
 }
 
 //= require_tree
